@@ -13,5 +13,6 @@ This project is a Python tool that takes a csv file from the user and reads it i
 2. The system will prompt for a file to be uploaded, provide csv file name along with file path.
 3. System will prompt user to enter table names, primary key, and functional dependencies.
 4. System will compute functional dependencies, closures, partial dependencies, and transitive dependencies. In case of issues, the system will detect partial dependencies or transitive dependencies.
-5. System will create new data frames in alignment with 3NF.
-6. System will create data definition language(DDL) scripts for new relations. It will apply DDL script programmatically to MySQL server database and insert data into newly created tables programmatically. 
+5. System will give all possible candidate keys.
+6. System will create new data frames in alignment with 3NF.
+7. System will create data definition language(DDL) scripts for new relations. It will apply DDL script programmatically to MySQL server database and insert data into newly created tables programmatically. 

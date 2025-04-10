@@ -1,6 +1,8 @@
 import pandas as pd
 import mysql.connector
 import re
+import itertools
+
 
 # Load the dataset
 data = input("Enter file name along with Path: ")
@@ -145,17 +147,17 @@ print('fds',fds)
 partial_dependencies_flag = 'No'
 
 for lhs, rhs in fds:
-    print('------------------')
-    print('len(lhs)', len(lhs))
-    print('lhs', lhs)
-    print('rhs', rhs)
+    #print('------------------')
+    #print('len(lhs)', len(lhs))
+    #print('lhs', lhs)
+    #print('rhs', rhs)
     if len(lhs) > 1:  # Check only for composite keys
         for attr in lhs:
-            print('attr',attr)
+            #print('attr',attr)
             reduced_lhs = lhs - {attr}  # Remove one attribute at a time
-            print('reduced_lhs', reduced_lhs)
+            #print('reduced_lhs', reduced_lhs)
             closure_reduced = compute_closure(reduced_lhs, fds)
-            print('closure_reduced', closure_reduced)
+            #print('closure_reduced', closure_reduced)
             if rhs in closure_reduced:
                 print(f"Partial Dependency Detected: {', '.join(lhs)} → {rhs}, since {', '.join(reduced_lhs)} → {rhs} also holds.")
                 partial_dependencies.append((lhs, rhs))
@@ -174,11 +176,11 @@ transitive_dependencies = []
 transitive_dependencies_flag = 'No'
 
 for lhs1, rhs1 in fds:
-    print('------------------')
-    print('lhs1 =', lhs1, 'rhs1 = ', rhs1)
+    #print('------------------')
+    #print('lhs1 =', lhs1, 'rhs1 = ', rhs1)
     for lhs2, rhs2 in fds:
-        print('#############')
-        print('lhs2 =', lhs2, 'rhs2 = ', rhs2)
+        #print('#############')
+        #print('lhs2 =', lhs2, 'rhs2 = ', rhs2)
         if rhs1 == lhs2:  # If RHS of one FD is LHS of another, we have a potential transitive dependency
             transitive_dependencies.append((lhs1, rhs2))
             print(f"Transitive Dependency Detected: {', '.join(lhs1)} → {rhs2}, via {rhs1}")
@@ -215,7 +217,6 @@ print(table1_df)
 print("\nTable 2 (3NF):")
 print(table2_df)
 
-import itertools
 
 def find_candidate_keys(all_attributes, fds):
     """
